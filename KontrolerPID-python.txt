@@ -1,0 +1,48 @@
+class PIDController:
+    def __init__(self, kp, ki, kd, delta_time):
+        self.kp = kp  # przechowywanie wzmocnienia proporcjonalnego
+        self.ki = ki  # przechowywanie wzmocnienie całkującego
+        self.kd = kd  # przechowywanie wzmocnienia różniczkującego
+        self.delta_time = delta_time  # Delta czasu (przechowywanie okresu próbkowania)
+        self.prev_error = 0  # przechowuje poprzedni błąd
+        self.integral = 0  # przechowuje skumulowany błąd
+
+    def oblicz(self, setpoint, current_value): #oblicza sygnał sterujący na podstawie podanych parametrów
+        error = setpoint - current_value   # Obliczenie błędu regulacji
+
+        # Obliczenie składników PID
+        p = self.kp * error #składnik proporcjonalny
+        self.integral += error * self.delta_time #aktualizacja błędu
+        i = self.ki * self.integral
+        delta_error = (error - self.prev_error) / self.delta_time
+        d = self.kd * delta_error
+
+        # Oblicz sygnał sterujący
+        control_signal = p + i + d
+
+        # Aktualizuj poprzedni błąd
+        self.prev_error = error
+
+        return control_signal
+
+# Przykład użycia
+if __name__ == '__main__':
+    kp = 1.0  # Wzmocnienie proporcjonalne
+    ki = 0.1  # Wzmocnienie całkujące
+    kd = 0.01  # Wzmocnienie różniczkujące
+    delta_time = 0.1  # Delta czasu (okres próbkowania)
+
+    pid_controller = PIDController(kp, ki, kd, delta_time)
+
+    setpoint = 10.0  # Wartość zadana
+    current_value = 0.0  # Aktualna wartość
+
+    time = 0
+
+    while time < 5:
+        control_signal = pid_controller.oblicz(setpoint, current_value)
+
+        current_value += control_signal * 0.1  # Przykładowa symulacja
+
+        print(f"Time: {time:.2f}, Current Value: {current_value:.2f}, Control Signal: {control_signal:.2f}")
+        time += delta_time

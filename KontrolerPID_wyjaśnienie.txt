@@ -1,0 +1,10 @@
+Na początku definiuję klasę. Przedstawia ona kontroler PID. Zawiera metody i atrybuty potrzebne do regulacji.
+Funkcja tej klasy przyjmuje argumenty takie jak kp,ki,kd, i deltę czasu. Na początku poprzedni błąd regulacji 
+oraz całkę ustawiamy na 0. Funkcja oblicz oblicza sygnał sterujący na podstawie podanych parametrów.
+Obliczamy błąd regulacji jako różnicę między podaną a aktualną wartością.
+W kolejnym kroku obliczamy trzy składniki PID (składnik proporcjonalny, całkujący i różniczkujący). 
+Następnie potrzebujemy policzyć sygnał sterujący (jest on sumą wyżej wymienionych składników). 
+Otrzymana wartość jest potrzebna do tego, by kontroler przesłał ją do systemu sterowanego aby wprowadzić zmiany. 
+Następnie aktualizujemy prev_error na bieżący. Zwracamy obliczony sygnał sterujący.
+W przykładzie podaję przykładowe wartości, w pętli while odbywa się symulacja działania kontrolera
+i systemu przez podany okres czasu.
