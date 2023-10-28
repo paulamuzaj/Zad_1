@@ -1,0 +1,15 @@
+Do rozwiązania zadania zastosowałam algorytm Jarvisa, ponieważ punkty znajdujące się na przestrzeni dwuwymiarowej 
+mają tworzyć otoczkę wypukłą.
+Na początku kodu zdefiniowałam strukturę ,,Point"(jest to punkt(x,y) na tej płaszczyźnie dwuwymiarowej).
+Strukturę zdefiniowałam jako typ double, ponieważ w poleceniu jest zaznaczone, że mogą być to liczby np. takie jak 2.5, 
+więc ten typ potrafi sobie poradzić przy podaniu takich punktów na wejściu.
+Funkcja convexHullJarvis zwraca wektor punktów tworzących otoczkę wypukłą.
+Do stworzenia otoczki wypukłej liczba punktów musi być większa lub równa 3. Dlatego też należy sprawdzić, czy n (liczba punktów) spełnia to wymaganie. 
+Jeśli n jest mniejsze od 3 to wypisujemy błąd i kończymy program.
+Następnie convexHull będzie przechowywał punkty otoczki. StartPoint jest punktem początkowym,aby rozpocząć otoczkę. Zaczynamy pętlę.Wartość startPoint 
+będzie się zmieniać, dopóki nie znajdziemy punktu o najniższej współrzędnej y i najbardziej na lewo - algorytm Jarvisa opiera się na tym, że szukamy punktu
+najbardziej na lewo i ,,najmniejszego", ustawiamy go jako punkt początkowy i od tego momentu poruszamy się przeciwnie do wskazówek zegara
+szukając pozostałych punktów otoczki wypukłej. Odbywa się to poprzez porównywanie kąta między punktami i aktualnym punktem otoczki,
+im większy kąt, tym punkt jest bardziej na zewnątrz. Punkt nextPoint , który jest najbardziej na zewnątrz jest dodawany do otoczki,
+a następnie staje się nowym currentPoint. Działamy dopóki nie wrócimy do punktu początkowego, co oznacza, że program utworzył otoczkę wypukłą. Funkcja zwraca punkty otoczki wypukłej.
+W funkcji main wczytujemy dane z pliku i wywołujemy funkcję convexHullJarvis do obliczenia otoczki wypukłej.
